@@ -1,0 +1,95 @@
+<html>
+    <head>
+        
+     
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+      
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"  crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"  crossorigin="anonymous">
+        <title>SaleForm</title>
+    </head>
+    <body onload="loadcustid()">
+      
+      <script type="text/javascript">
+            $(document).ready(function () {
+                $('#datepicker').datepicker();
+               
+            });
+            function loadcustid()
+            {
+                $.ajax({
+               method: "POST",
+               url: "custid.php",
+               data: ""
+                  })
+              .done(function( msg ) {
+              
+              var sel = $("#custid");
+    sel.empty();
+
+    var temp = $.parseJSON(msg);
+    for (var i=0; i<temp.length; i++) {
+      sel.append('<option value="' + temp[i].id + '">' + temp[i].id + '</option>');
+    }
+
+
+
+                    });
+                  }
+        </script>     
+        <div class="fluid-container">
+<h1 style="color:aqua;text-align: center;">SaleMaster</h1>
+<form method="post" action="salemaster.php">
+<div class="mb-3 row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">SaleID</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="saleid" name="saleid">
+    </div>
+</div>
+    <select id="custid" name="customerid" class="form-select" aria-label="Default select example" style="width: 49%;">
+         
+       
+
+
+      </select>
+
+
+
+
+      <div class="col-2">
+        <label for="date" class="col-sm-1 col-form-label">Date</label>
+        <div class="input-group date" id="datepicker" data-date-format="yyyy-mm-dd">
+            <input type="text" class="form-control"  name="saledate">
+            <span class="input-group-append">
+            <span class="input-group-text bg-white d-block">
+            <i class="fa fa-calendar"></i>
+            </span>
+            </span>
+        </div>
+    </div>    
+  <h1 style="color:aquamarine;text-align: center;">Sale Detail</h1>
+    <div class="mb-3 row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Product ID</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="pid" name="productid">
+        </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Quantity</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="pid" name="productid">
+          <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+
+   
+</form>
+</div>
+      
+    </body>
+
+</html>
